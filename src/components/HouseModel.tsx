@@ -1,5 +1,13 @@
 import { Html } from "@react-three/drei";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { Object3D, Vector3 } from "three";
+
+interface PropsHouse {
+  currentRoom: string;
+  scene: Object3D;
+  navigation: Object3D[];
+  handleMove: (position: Vector3) => void;
+}
 
 const Capsule = ({ text, moveTo }: { text: string; moveTo: () => void }) => {
   const [hoverd, setHover] = useState(false);
@@ -22,24 +30,21 @@ const Capsule = ({ text, moveTo }: { text: string; moveTo: () => void }) => {
         transition: "ease-out 0.5s",
       }}
     >
-      {/* {text} */}
+      {text}
     </div>
   );
 };
 
 export default function HouseModel({
-  cameraRef,
   currentRoom,
   scene,
   navigation,
   handleMove,
-}) {
-  console.log(cameraRef.current);
-
+}: PropsHouse) {
   return (
     <>
       <primitive object={scene}>
-        {navigation.map((item) => (
+        {navigation.map((item: Object3D) => (
           <Html
             as="div"
             key={item.id}

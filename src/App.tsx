@@ -37,7 +37,6 @@ function App() {
           <HouseModel
             scene={scene}
             navigation={navigation}
-            cameraRef={cameraRef}
             currentRoom={currentRoom}
             handleMove={handleMove}
           />
