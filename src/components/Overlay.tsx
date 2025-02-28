@@ -5,20 +5,40 @@ export default function Overlay({
   room: string;
   exit: () => void;
 }) {
+  if (room === "default") return null;
+
   return (
     <div
       style={{
-        background: "transparent",
+        background: "rgba(255,255,255,0.2)",
+        backdropFilter: "blur(5px)",
         width: "100%",
         display: "flex",
-        justifyContent: "center",
         zIndex: 10,
-        position: "absolute",
-        bottom: "10%",
+        minHeight: "150px",
+        position: "fixed",
+        bottom: 0,
+        left: 0,
         margin: "auto",
       }}
     >
-      {room !== "default" ? <button onClick={exit}>Exit</button> : null}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ color: "white", fontSize: "2rem" }}>{room}</div>
+        <button
+          style={{ width: "max-content", background: "rgba(255,255,255,0.2)" }}
+          onClick={exit}
+        >
+          Exit
+        </button>
+      </div>
     </div>
   );
 }

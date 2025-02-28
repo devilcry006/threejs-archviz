@@ -6,10 +6,10 @@ interface PropsHouse {
   currentRoom: string;
   scene: Object3D;
   navigation: Object3D[];
-  handleMove: (position: Vector3) => void;
+  handleMove: (position: Vector3, roomName: string) => void;
 }
 
-const Capsule = ({ text, moveTo }: { text: string; moveTo: () => void }) => {
+const Capsule = ({ moveTo }: { moveTo: () => void }) => {
   const [hoverd, setHover] = useState(false);
 
   const handleMouseEnter = () => setHover(true);
@@ -29,9 +29,7 @@ const Capsule = ({ text, moveTo }: { text: string; moveTo: () => void }) => {
         cursor: "pointer",
         transition: "ease-out 0.5s",
       }}
-    >
-      {text}
-    </div>
+    ></div>
   );
 };
 
@@ -43,7 +41,7 @@ export default function HouseModel({
 }: PropsHouse) {
   return (
     <>
-      <primitive object={scene}>
+      <primitive object={scene} castShadow>
         {navigation.map((item: Object3D) => (
           <Html
             as="div"
@@ -51,10 +49,7 @@ export default function HouseModel({
             position={item.position}
             style={{ display: currentRoom === "default" ? "block" : "none" }}
           >
-            <Capsule
-              text={item.name}
-              moveTo={() => handleMove(item.position)}
-            />
+            <Capsule moveTo={() => handleMove(item.position, item.name)} />
           </Html>
         ))}
       </primitive>
