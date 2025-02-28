@@ -3,7 +3,10 @@ import { Dispatch, useRef } from "react";
 
 export const useCustomCamera = (setRoom: Dispatch<string>) => {
   const cameraRef = useRef<CameraControls>(null);
-  const handleMove = (position: { x: number; y: number; z: number }) => {
+  const handleMove = (
+    position: { x: number; y: number; z: number },
+    roomName: string
+  ) => {
     if (cameraRef.current) {
       cameraRef.current.setPosition(position.x, position.y, position.z, true);
       cameraRef.current.setTarget(position.x, position.y, position.z, true);
@@ -12,7 +15,7 @@ export const useCustomCamera = (setRoom: Dispatch<string>) => {
       const offset = 0.001; // Tiny offset to prevent snapping
 
       cameraRef.current.setLookAt(x, y, z, x + offset, y, z, true); // Smooth transition
-      setRoom("inside");
+      setRoom(roomName);
     }
   };
   const handleExit = () => {
