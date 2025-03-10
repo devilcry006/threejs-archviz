@@ -21,10 +21,20 @@ export default function DirectionLight({
       );
       lightRef.current.intensity = intensity;
 
-      lightRef.current.target.position.set(0, 0, 0); // Ensure light faces the center
+      // lightRef.current.target.position.set(0, 0, 0); // Ensure light faces the center
       lightRef.current.target.updateMatrixWorld();
     }
   });
 
-  return <directionalLight ref={lightRef} intensity={5} />;
+  return (
+    <directionalLight
+      ref={lightRef}
+      intensity={intensity}
+      position={[50, 7, 12]}
+      castShadow
+      shadow-radius={100}
+      shadow-mapSize-width={1024}
+      shadow-mapSize-height={1024}
+    ></directionalLight>
+  );
 }
