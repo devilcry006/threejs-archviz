@@ -1,29 +1,35 @@
 import {
   Drawer,
+  FormControlLabel,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   Slider,
+  Switch,
 } from "@mui/material";
-import { Dispatch, useState } from "react";
+import { ChangeEvent, Dispatch, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ThreeSixtyIcon from "@mui/icons-material/ThreeSixty";
+// import ThreeSixtyIcon from "@mui/icons-material/ThreeSixty";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
 interface PropsNavigationBar {
-  lightRotation: number;
-  setLightRotation: Dispatch<number>;
+  // lightRotation: number;
+  // setLightRotation: Dispatch<number>;
   lightIntensity: number;
   setLightIntensity: Dispatch<number>;
+  visble: boolean;
+  setVisible:Dispatch<boolean>;
 }
 
 function NavigationBar({
-  lightRotation,
-  setLightRotation,
+  // lightRotation,
+  // setLightRotation,
   lightIntensity,
   setLightIntensity,
+  visble,
+  setVisible
 }: PropsNavigationBar) {
   const [drawer, setDrawer] = useState<boolean>(false);
 
@@ -62,7 +68,7 @@ function NavigationBar({
               }
             />
           </ListItem>
-          <ListItem>
+          {/* <ListItem>
             <ListItemIcon>
               <ThreeSixtyIcon />
             </ListItemIcon>
@@ -74,6 +80,9 @@ function NavigationBar({
                 setLightRotation((value as number) * (Math.PI / 180))
               }
             />
+          </ListItem> */}
+          <ListItem>
+            <FormControlLabel control={<Switch checked={visble} onChange={(event: ChangeEvent<HTMLInputElement>) => setVisible(event.target.checked)} />} label="Props" />
           </ListItem>
 
           <ListItemButton onClick={handleClose}>Exit</ListItemButton>
